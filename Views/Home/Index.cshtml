@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<button id="getWeatherButton">Click</button>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#getWeatherButton').click(function () {
+
+            $.ajax({
+                type: "GET",
+                url: "@Url.Action("Get")",
+                data: { city: "Minsk" },
+                dataType: "text",
+                success: function (msg) {
+                    let temp = Number.parseInt(msg) - 273
+                    alert(temp);
+                },
+                error: function (req, status, error) {
+                    alert(error);
+                }
+            });
+        });
+    });
+</script>
